@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with credit balances, role and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "bio": { "type": "string", "maxLength": 512 },
+        "role": { "type": "string", "enum": ["admin", "editor", "viewer", "creator"] },
+        "credits": { "type": "number" },
+        "bonusCredits": { "type": "number" },
+        "tier": { "type": "string", "enum": ["free", "pro", "vip"] },
+        "preferredCurrency": { "type": "string", "enum": ["EUR", "USD", "GBP"] },
+        "encryptionEnabled": { "type": "boolean" },
+        "onboardingCompleted": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "credits", "tier"]
+    },
+    "ProjectFolder": {
+      "title": "ProjectFolder",
+      "description": "Project collection organizing multiple image assets and their edits",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 128 },
+        "description": { "type": "string", "maxLength": 512 },
+        "category": { "type": "string", "maxLength": 64 },
+        "color": { "type": "string", "maxLength": 32 },
+        "imageCount": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "createdAt"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "AI created images, face morphs, videos, or audio assets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "folderId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "toolId": { "type": "string", "maxLength": 64 },
+        "toolCategory": { "type": "string", "maxLength": 64 },
+        "prompt": { "type": "string", "maxLength": 2048 },
+        "resultUrl": { "type": "string", "maxLength": 4096 },
+        "inputImageUrl": { "type": "string", "maxLength": 4096 },
+        "aspectRatio": { "type": "string", "maxLength": 16 },
+        "status": { "type": "string", "enum": ["processing", "completed", "failed"] },
+        "creditsCost": { "type": "number" },
+        "isEncrypted": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "toolId", "status", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Credit purchase transaction record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "credits": { "type": "number" },
+        "bonusCredits": { "type": "number" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 8 },
+        "paymentMethod": { "type": "string", "maxLength": 32 },
+        "status": { "type": "string", "enum": ["completed", "pending", "failed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "credits", "amount", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user account profile and balance"
+    },
+    "/users/{userId}/folders/{folderId}": {
+      "schema": "ProjectFolder",
+      "description": "Stores user organized project folders"
+    },
+    "/users/{userId}/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Stores user creative projects and media generations"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Stores user payment history"
+    }
+  }
+}

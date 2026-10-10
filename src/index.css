@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --color-accent1: #FF4500;
+  --color-accent2: #00ACA9;
+  --color-accent3: #0162FF;
+  --color-accent4: #4682B4;
+  --color-accent5: #6495ED;
+  --color-accent6: #003878;
+
+  --color-font-light: #282828;
+  --color-font-dark: #E8E8E8;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --accent-1: #FF4500;
+    --accent-2: #00ACA9;
+    --accent-3: #0162FF;
+    --accent-4: #4682B4;
+    --accent-5: #6495ED;
+    --accent-6: #003878;
+    --font-light: #282828;
+    --font-dark: #E8E8E8;
+  }
+  :root.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+html.dark body {
+  background-color: #040814;
+  color: #E8E8E8;
+}
+
+html:not(.dark) body {
+  background-color: #f8fafc;
+  color: #282828;
+}
+
+/* Smooth transitions for theme toggle */
+* {
+  transition-property: color, background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.font-dosis {
+  font-family: 'Dosis', sans-serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Palette utility classes for easy referencing */
+.bg-accent-1 { background-color: #FF4500; }
+.bg-accent-2 { background-color: #00ACA9; }
+.bg-accent-3 { background-color: #0162FF; }
+.bg-accent-4 { background-color: #4682B4; }
+.bg-accent-5 { background-color: #6495ED; }
+.bg-accent-6 { background-color: #003878; }
+
+.text-accent-1 { color: #FF4500; }
+.text-accent-2 { color: #00ACA9; }
+.text-accent-3 { color: #0162FF; }
+.text-accent-4 { color: #4682B4; }
+.text-accent-5 { color: #6495ED; }
+.text-accent-6 { color: #003878; }
+
+.border-accent-1 { border-color: #FF4500; }
+.border-accent-2 { border-color: #00ACA9; }
+.border-accent-3 { border-color: #0162FF; }
+.border-accent-4 { border-color: #4682B4; }
+.border-accent-5 { border-color: #6495ED; }
+.border-accent-6 { border-color: #003878; }
+
+/* Custom scrollbars for mobile & desktop */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(70, 130, 180, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(1, 98, 255, 0.6);
+}
+
+/* Crisp Checkerboard for Transparent PNG Previews */
+.bg-checkerboard {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23cbd5e1'%3E%3Crect width='8' height='8'/%3E%3Crect x='8' y='8' width='8' height='8'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  background-color: #ffffff;
+}
+
+.dark .bg-checkerboard {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231e293b'%3E%3Crect width='8' height='8'/%3E%3Crect x='8' y='8' width='8' height='8'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  background-color: #090d16;
+}

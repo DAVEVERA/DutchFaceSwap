@@ -1,0 +1,6 @@
+{
+  "name": "Swapsmoel.com - AI Beeldbewerking & Studio",
+  "description": "Hét complete Nederlandse AI-platform voor beeldbewerking, face swaps, video generatie, avatar creatie en visuele effecten.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
